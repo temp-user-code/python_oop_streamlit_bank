@@ -50,7 +50,10 @@ elif menu_choice == "Access Account (Deposit/Withdraw)":
             dep_amount = st.number_input("Amount to Deposit", min_value=0, step=1, key="dep")
             if st.button("Deposit Money"):
                 message = account_found.deposit(dep_amount)
-                st.success(message)
+                if message.startswith("In"):
+                    st.error(message)
+                else:
+                    st.success(message)
 
         with tab2:
             wid_amount = st.number_input("Amount to Withdraw", min_value=0, step=1, key="wid")
@@ -89,3 +92,4 @@ elif menu_choice == "View All Accounts":
             st.write(acc.get_details())
     else:
         st.warning("No accounts in system yet.")
+
